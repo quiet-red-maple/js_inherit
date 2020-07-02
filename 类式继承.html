@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类式继承</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    // 类式继承 (子类原型是父类实例)
+    // 缺点 一个子类实例更改子类原型从父类构造函数中继承来的*引用类型*的共有属性就会直接影响到其他子类
+    function SuperClass() {
+        this.superValue = true;
+        this.arr = ['js', 'html', 'css']
+    }
+
+    SuperClass.prototype.getSuperValue = function() {
+        return this.superValue;
+    }
+
+    function SubClass() {
+        this.subValue = false;
+    }
+
+    SubClass.prototype = new SuperClass();
+
+    SubClass.prototype.getSubValue = function() {
+        return this.subValue;
+    }
+
+    let a = new SubClass();
+    console.log(a.subValue);
+    console.log(a.superValue);
+    let b = new SubClass();
+    console.log(b.arr)
+    a.arr.push('vscode')
+    console.log(b.arr)
+</script>
+
+</html>

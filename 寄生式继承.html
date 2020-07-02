@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 寄生式继承 （对原型继承的二次封装）
+    // 缺点 一个子类实例更改子类原型从父类构造函数中继承来的*引用类型*的共有属性就会直接影响到其他子类
+    var book = {
+        name: 'js book',
+        arr: ['js', 'html', 'css']
+    }
+
+    function createObject(o) {
+        function F() {}
+        F.prototype = o;
+        return new F()
+    }
+
+    function createBook(obj) {
+        var o = new createObject(obj);
+        o.getName = function() {
+            console.log(this.name)
+        }
+        return o;
+    }
+
+    let a = new createBook(book);
+
+    console.log(a.name)
+    console.log(a.arr)
+    a.getName()
+
+    let b = new createBook(book);
+
+    console.log(b.name)
+    console.log(b.arr)
+    b.getName()
+
+    a.arr.push('xml')
+    console.log(a.arr)
+    console.log(b.arr)
+</script>
+
+</html>

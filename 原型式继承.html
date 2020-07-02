@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 原型式继承（只不过是对类式继承的封装）
+    // 缺点 同类式继承相同 一个子类实例更改子类原型从父类构造函数中继承来的*引用类型*的共有属性就会直接影响到其他子类
+    function createObject(o) {
+        function F() {}
+        F.prototype = o;
+        return new F()
+    }
+
+    var book = {
+        name: 'js book',
+        arr: ['css', 'html', 'js']
+    }
+
+    var first = createObject(book);
+    console.log(first.name)
+    console.log(first.arr)
+    var second = createObject(book);
+    console.log(second.name)
+    console.log(second.arr)
+    second.arr.push('xml')
+    console.log(first.arr)
+</script>
+
+</html>

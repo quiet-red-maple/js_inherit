@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合继承</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    // 组合继承
+    // 缺点父类构造函数调用了两遍
+    function SuperClass(name) {
+        this.name = name;
+        this.books = ['js', 'html', 'css']
+    }
+    SuperClass.prototype.getName = function() {
+        console.log(this.name)
+    }
+
+    function SubClass(name, time) {
+        SuperClass.call(this, name)
+        this.time = time
+    }
+
+    SubClass.prototype = new SuperClass();
+
+    SubClass.prototype.getTime = function() {
+        console.log(this.time);
+    }
+
+    let a = new SubClass('李', 10)
+    console.log(a.name, a.books)
+    a.books.push('剪纸')
+    a.getName();
+    a.getTime();
+    console.log(a.books)
+
+    let b = new SubClass('wang', 11)
+    console.log(b.name, b.books)
+    b.getName();
+    b.getTime();
+</script>
+
+</html>

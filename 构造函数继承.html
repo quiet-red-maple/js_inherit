@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数继承</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 构造函数继承
+    // 缺点只能继承父类的共有属性，不能继承父类的原型方法
+    function SuperClass(id) {
+        this.books = ['js', 'html', 'css'];
+        this.id = id;
+    }
+
+    SuperClass.prototype.showBooks = function() {
+        console.log(this.books)
+    }
+
+    function SubClass(id) {
+        SuperClass.call(this, id);
+    }
+
+    let a = new SubClass(10);
+    let b = new SubClass(11);
+    console.log(a.books)
+    console.log(b.books)
+    console.log(a.id)
+    console.log(b.id)
+    console.log(a.showBooks)
+    console.log(b.showBooks)
+</script>
+
+</html>
